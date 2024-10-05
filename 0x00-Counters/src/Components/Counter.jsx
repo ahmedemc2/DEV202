@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.css";
 
 class Counter extends Component {
   state = {
-    count: this.props.count,
+    count: this.props.counter.value,
   };
 
   decrement = () => {
@@ -28,6 +28,7 @@ class Counter extends Component {
 
   render() {
     let { count } = this.state;
+    // let { counter } = this.props;
 
     return (
       <div className="row g-2 align-items-center">
@@ -50,7 +51,12 @@ class Counter extends Component {
           >
             +
           </button>
-          <button className="btn btn-sm btn-danger m-2">Delete</button>
+          <button
+            className="btn btn-sm btn-danger m-2"
+            onClick={() => this.props.onDelete(this.props.counter)}
+          >
+            Delete
+          </button>
         </div>
       </div>
     );
