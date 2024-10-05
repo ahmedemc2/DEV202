@@ -4,31 +4,28 @@ import ReactDom from "react-dom/client";
 import Counter from "./Counter";
 
 class Counters extends Component {
-  state = {
-    counters: [
-      { value: 10, id: 5 },
-      { value: 0, id: 6 },
-      { value: 3, id: 7 },
-      { value: 16, id: 8 },
-    ],
-  };
-
-  handleDelete = (counter) => {
-    const counters = this.state.counters.filter((c) => c.id !== counter.id);
-    this.setState({ counters });
-  };
-
+  state = {};
   render() {
+    let { counters } = this.props;
+
     return (
-      <>
-        {this.state.counters.map((counter) => (
+      <main className="container">
+        <button
+          className="btn btn-warning btn-sm m-2"
+          onClick={this.props.onReset}
+        >
+          Reset
+        </button>
+        {counters.map((counter) => (
           <Counter
             counter={counter}
             key={counter.id}
-            onDelete={this.handleDelete}
+            onIncrement={this.props.onIncrement}
+            onDecrement={this.props.onDecrement}
+            onDelete={this.props.onDelete}
           />
         ))}
-      </>
+      </main>
     );
   }
 }

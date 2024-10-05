@@ -3,57 +3,42 @@ import ReactDom from "react-dom/client";
 import "bootstrap/dist/css/bootstrap.css";
 
 class Counter extends Component {
-  state = {
-    count: this.props.counter.value,
-  };
-
-  decrement = () => {
-    let { count } = this.state;
-    count--;
-    this.setState({ count });
-  };
-
-  increment = () => {
-    {
-      this.setState({ count: this.state.count + 1 });
-    }
-  };
+  state = {};
 
   setSpanClass = () => {
-    let { count } = this.state;
+    let count = this.props.counter.value;
     let classes = "badge text-bg-";
     classes += count === 0 ? "warning" : "primary";
     return classes;
   };
 
   render() {
-    let { count } = this.state;
-    // let { counter } = this.props;
+    let { counter } = this.props;
 
     return (
       <div className="row g-2 align-items-center">
         <div className="col-1">
           <span className={this.setSpanClass()}>
-            {count === 0 ? "Zero" : count}
+            {counter.value === 0 ? "Zero" : counter.value}
           </span>
         </div>
         <div className="col">
           <button
             className="btn btn-sm btn-secondary m-2"
-            onClick={this.decrement}
-            disabled={count === 0}
+            onClick={() => this.props.onDecrement(counter)}
+            disabled={counter.value === 0}
           >
             -
           </button>
           <button
             className="btn btn-sm btn-secondary m-2"
-            onClick={this.increment}
+            onClick={() => this.props.onIncrement(counter)}
           >
             +
           </button>
           <button
             className="btn btn-sm btn-danger m-2"
-            onClick={() => this.props.onDelete(this.props.counter)}
+            onClick={() => this.props.onDelete(counter)}
           >
             Delete
           </button>
